@@ -8,12 +8,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create zip file
-        uses: thedoctor0/zip-release@master
-        with:
-        type: "zip"
-        filename: "oke-stack.zip"
-        exclusions: "*.git*"
+      - name: Build project # This would actually build your project, using zip for an example artifact
+        run: |
+          zip --junk-paths oke-stack README.md
 
       - name: Create Release
         id: create_release
