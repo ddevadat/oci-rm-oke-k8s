@@ -20,8 +20,8 @@ jobs:
         with:
           tag_name: V${{ github.run_number }}
           release_name: Release V${{ github.run_number }}
-          draft: false
-          prerelease: false
+          # draft: false
+          # prerelease: false
 
       - name: Upload Release Asset
         id: upload-release-asset
