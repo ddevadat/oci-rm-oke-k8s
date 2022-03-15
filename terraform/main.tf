@@ -11,7 +11,7 @@ module "network" {
   compartment_id           = var.compartment_ocid
   dns_label                = "oke${random_string.deploy_id.result}"
   deploy_id                = random_string.deploy_id.result
-  display_name             = "OKE TEST VCN1"
+  display_name             = "OKE TEST VCN"
   cidr_block               = lookup(var.network_cidrs, "VCN-CIDR")
   k8s_endpoint_subnet_cidr = lookup(var.network_cidrs, "ENDPOINT-SUBNET-REGIONAL-CIDR")
   all_cidr                 = lookup(var.network_cidrs, "ALL-CIDR")
