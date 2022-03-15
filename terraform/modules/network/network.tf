@@ -5,7 +5,7 @@
 resource "oci_core_virtual_network" "oke_vcn" {
   cidr_block     = var.cidr_block
   compartment_id = var.compartment_id
-  display_name   = "OKE TEST VCN - ${var.deploy_id}"
+  display_name   = "${var.display_name} - ${var.deploy_id}"
   dns_label      = var.dns_label
 
 }
