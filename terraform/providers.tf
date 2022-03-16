@@ -46,13 +46,13 @@ provider "oci" {
   private_key_path = var.private_key_path
 }
 
-# provider "kubernetes" {
-#   host                   = module.oke.cluster_endpoint
-#   cluster_ca_certificate = module.oke.cluster_ca_certificate
-#   exec {
-#     api_version = "client.authentication.k8s.io/v1beta1"
-#     args        = ["ce", "cluster", "generate-token", "--cluster-id", module.oke.cluster_id, "--region", module.oke.cluster_region]
-#     command     = "oci"
-#   }
-# }
+provider "kubernetes" {
+  host                   = module.oke.cluster_endpoint
+  cluster_ca_certificate = module.oke.cluster_ca_certificate
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    args        = ["ce", "cluster", "generate-token", "--cluster-id", module.oke.cluster_id, "--region", module.oke.cluster_region]
+    command     = "oci"
+  }
+}
 

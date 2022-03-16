@@ -1,15 +1,15 @@
 
-output "vcn_id" {
-  value = module.network.vcn_id
-}
+# output "vcn_id" {
+#   value = module.network.vcn_id
+# }
 
-output "k8s_endpoint_subnet_id" {
-  value = module.network.k8s_endpoint_subnet_id
-}
+# output "k8s_endpoint_subnet_id" {
+#   value = module.network.k8s_endpoint_subnet_id
+# }
 
-output "k8s_nodes_subnet_id" {
-  value = module.network.k8s_nodes_subnet_id
-}
+# output "k8s_nodes_subnet_id" {
+#   value = module.network.k8s_nodes_subnet_id
+# }
 
 
 # output "cluster_ca_certificate" {
