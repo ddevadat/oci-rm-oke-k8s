@@ -6,9 +6,11 @@ resource "oci_containerengine_cluster" "oke_cluster" {
   vcn_id             = var.oke_vcn_id
 
   endpoint_config {
-    is_public_ip_enabled = true
+    is_public_ip_enabled = (var.cluster_endpoint_visibility == "Private") ? false : true
     subnet_id            = var.oke_k8s_endpoint_subnet_id
+    nsg_ids              = []
   }
+
   options {
     service_lb_subnet_ids = [var.oke_k8s_lb_subnet_id]
     add_ons {
@@ -32,8 +34,7 @@ resource "oci_containerengine_node_pool" "oke_node_pool" {
   kubernetes_version = var.k8s_version
   name               = var.node_pool_name
   node_shape         = "VM.Standard.E3.Flex"
-  #ssh_public_key     = local.ssh_public_key
-  ssh_public_key = var.generate_public_ssh_key ? tls_private_key.oke_worker_node_ssh_key.public_key_openssh : var.public_ssh_key
+  ssh_public_key     = var.generate_public_ssh_key ? tls_private_key.oke_worker_node_ssh_key.public_key_openssh : var.public_ssh_key
 
 
   node_config_details {

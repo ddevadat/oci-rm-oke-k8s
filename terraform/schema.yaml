@@ -33,6 +33,11 @@ variableGroups:
   - title: "OKE Cluster Configuration"
     variables:
       - k8s_version
+      - cluster_workers_visibility
+      - cluster_endpoint_visibility
+
+  - title: "OKE Worker Nodes"
+    variables:
       - num_pool_workers
       - node_pool_shape
       - node_pool_node_shape_config_ocpus
@@ -68,6 +73,24 @@ variables:
     visible:
       and:
         - show_advanced
+
+  cluster_workers_visibility:
+    type: enum
+    enum:
+      - "Private"
+      - "Public"
+    title: "Choose Worker Nodes visibility type"
+    required: true
+    visible: true
+
+  cluster_endpoint_visibility:
+    type: enum
+    enum:
+      # - "Private"
+      - "Public"
+    title: "Choose Kubernetes API Endpoint visibility type"
+    required: true
+    visible: true
 
   num_pool_workers:
     type: integer

@@ -76,3 +76,24 @@ variable "public_ssh_key" {
   default     = ""
   description = "In order to access your private nodes with a public SSH key you will need to set up a bastion host (a.k.a. jump box). If using public nodes, bastion is not needed. Left blank to not import keys."
 }
+
+
+variable "cluster_workers_visibility" {
+  default     = "Private"
+  description = "The Kubernetes worker nodes that are created will be hosted in public or private subnet(s)"
+
+  validation {
+    condition     = var.cluster_workers_visibility == "Private" || var.cluster_workers_visibility == "Public"
+    error_message = "Sorry, but cluster visibility can only be Private or Public."
+  }
+}
+
+variable "cluster_endpoint_visibility" {
+  default     = "Public"
+  description = "The Kubernetes cluster that is created will be hosted on a public subnet with a public IP address auto-assigned or on a private subnet. If Private, additional configuration will be necessary to run kubectl commands"
+
+  validation {
+    condition     = var.cluster_endpoint_visibility == "Private" || var.cluster_endpoint_visibility == "Public"
+    error_message = "Sorry, but cluster endpoint visibility can only be Private or Public."
+  }
+}

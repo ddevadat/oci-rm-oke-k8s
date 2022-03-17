@@ -15,6 +15,8 @@ module "oke" {
   oke_k8s_lb_subnet_id                      = oci_core_subnet.oke_lb_subnet.id
   k8s_nodes_subnet_id                       = oci_core_subnet.oke_nodes_subnet.id
   k8s_version                               = (var.k8s_version == "Latest") ? local.cluster_k8s_latest_version : var.k8s_version
+  cluster_endpoint_visibility               = var.cluster_endpoint_visibility
+  cluster_workers_visibility                = var.cluster_workers_visibility
   k8s_service_cidr                          = local.k8s_service_cidr
   k8s_pods_cidr                             = local.k8s_pods_cidr
   tenancy_ocid                              = var.tenancy_ocid
