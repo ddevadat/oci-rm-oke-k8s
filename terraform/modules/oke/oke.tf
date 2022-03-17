@@ -32,7 +32,9 @@ resource "oci_containerengine_node_pool" "oke_node_pool" {
   kubernetes_version = var.k8s_version
   name               = var.node_pool_name
   node_shape         = "VM.Standard.E3.Flex"
-  ssh_public_key     = local.ssh_public_key
+  #ssh_public_key     = local.ssh_public_key
+  ssh_public_key = var.generate_public_ssh_key ? tls_private_key.oke_worker_node_ssh_key.public_key_openssh : var.public_ssh_key
+
 
   node_config_details {
     dynamic "placement_configs" {
@@ -43,14 +45,14 @@ resource "oci_containerengine_node_pool" "oke_node_pool" {
         subnet_id           = var.k8s_nodes_subnet_id
       }
     }
-    size = 1
+    size = var.num_pool_workers
   }
 
   dynamic "node_shape_config" {
     for_each = local.is_flexible_node_shape ? [1] : []
     content {
-      ocpus         = 1
-      memory_in_gbs = 16
+      ocpus         = var.node_pool_node_shape_config_ocpus
+      memory_in_gbs = var.node_pool_node_shape_config_memory_in_gbs
     }
   }
 
@@ -65,6 +67,13 @@ resource "oci_containerengine_node_pool" "oke_node_pool" {
     value = var.node_pool_name
   }
 
+}
+
+
+# Generate ssh keys to access Worker Nodes, if generate_public_ssh_key=true, applies to the pool
+resource "tls_private_key" "oke_worker_node_ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 2048
 }
 
 

@@ -29,3 +29,25 @@ variable "node_pool_name" {
   default     = "pool1"
   description = "Name of the node pool"
 }
+
+variable "num_pool_workers" {
+  default     = 3
+  description = "The number of worker nodes in the node pool. If select Cluster Autoscaler, will assume the minimum number of nodes configured"
+}
+
+variable "node_pool_node_shape_config_ocpus" {
+  default     = "1" # Only used if flex shape is selected
+  description = "You can customize the number of OCPUs to a flexible shape"
+}
+variable "node_pool_node_shape_config_memory_in_gbs" {
+  default     = "16" # Only used if flex shape is selected
+  description = "You can customize the amount of memory allocated to a flexible shape"
+}
+
+variable "generate_public_ssh_key" {
+  default = true
+}
+variable "public_ssh_key" {
+  default     = ""
+  description = "In order to access your private nodes with a public SSH key you will need to set up a bastion host (a.k.a. jump box). If using public nodes, bastion is not needed. Left blank to not import keys."
+}
