@@ -28,6 +28,8 @@ module "oke" {
   generate_public_ssh_key                   = var.generate_public_ssh_key
   public_ssh_key                            = var.public_ssh_key
 
+  count = var.create_new_oke_cluster ? 1 : 0
+
 }
 
 resource "kubernetes_namespace" "acme_namespace" {

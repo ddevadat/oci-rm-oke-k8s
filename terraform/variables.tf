@@ -97,3 +97,9 @@ variable "cluster_endpoint_visibility" {
     error_message = "Sorry, but cluster endpoint visibility can only be Private or Public."
   }
 }
+
+
+variable "create_new_oke_cluster" {
+  default     = true
+  description = "Creates a new OKE cluster, node pool and network resources"
+}
