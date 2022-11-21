@@ -36,5 +36,5 @@ resource "kubernetes_namespace" "acme_namespace" {
   metadata {
     name = "acme"
   }
-  depends_on = [module.oke[0]]
+  depends_on = [module.oke]
 }
