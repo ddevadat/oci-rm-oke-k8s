@@ -14,3 +14,12 @@ output "cluster_id" {
 output "cluster_region" {
   value = yamldecode(data.oci_containerengine_cluster_kube_config.oke.content)["users"][0]["user"]["exec"]["args"][6]
 }
+
+
+output "oke_cluster_id" {
+  value = oci_containerengine_cluster.oke_cluster.id
+}
+
+output "oke_nodepool_id" {
+  value = oci_containerengine_node_pool.oke_node_pool.id
+}
