@@ -51,11 +51,11 @@ provider "oci" {
 }
 
 provider "kubernetes" {
-  host                   = module.oke.cluster_endpoint
-  cluster_ca_certificate = module.oke.cluster_ca_certificate
+  host                   = module.oke[0].cluster_endpoint
+  cluster_ca_certificate = module.oke[0].cluster_ca_certificate
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
-    args        = ["ce", "cluster", "generate-token", "--cluster-id", module.oke.cluster_id, "--region", module.oke.cluster_region]
+    args        = ["ce", "cluster", "generate-token", "--cluster-id", module.oke[0].cluster_id, "--region", module.oke[0].cluster_region]
     command     = "oci"
   }
 }
